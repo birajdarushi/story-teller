@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.cache/
+.rustup/
+.cargo/
+
+# Audio Files (Output)
+audio_files/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store

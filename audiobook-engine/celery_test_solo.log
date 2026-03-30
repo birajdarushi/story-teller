@@ -1,0 +1,603 @@
+/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/services/gemini_client.py:1: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+MusicGen using device: mps
+ 
+ -------------- worker3@Rushirajs-MacBook-Air.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.3.1-arm64-arm-64bit 2026-03-29 23:36:26
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         audiobook:0x10b34b690
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 2 (solo)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . workers.music_gen.generate_music_task
+  . workers.narration.generate_narration_task
+  . workers.pipeline.run_pipeline
+  . workers.scene_parser.parse_scenes_task
+
+[2026-03-29 23:36:26,422: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-03-29 23:36:26,425: INFO/MainProcess] mingle: searching for neighbors
+[2026-03-29 23:36:27,466: INFO/MainProcess] mingle: sync with 1 nodes
+[2026-03-29 23:36:27,469: INFO/MainProcess] mingle: sync complete
+[2026-03-29 23:36:27,512: INFO/MainProcess] worker3@Rushirajs-MacBook-Air.local ready.
+[2026-03-29 23:40:57,453: INFO/MainProcess] Task workers.pipeline.run_pipeline[29d559a5-db06-4819-bd58-873c0bccb858] received
+[2026-03-29 23:41:13,217: ERROR/MainProcess] Task workers.pipeline.run_pipeline[29d559a5-db06-4819-bd58-873c0bccb858] raised unexpected: RuntimeError('Never call result.get() within a task!\nSee https://docs.celeryq.dev/en/latest/userguide/tasks.html#avoid-launching-synchronous-subtasks\n')
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 858, in __protected_call__
+    return self.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/pipeline.py", line 59, in run_pipeline
+    raise e
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/pipeline.py", line 48, in run_pipeline
+    gen_group.apply_async().get()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/result.py", line 707, in get
+    return (self.join_native if self.supports_native_join else self.join)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/result.py", line 824, in join_native
+    assert_will_not_block()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/result.py", line 38, in assert_will_not_block
+    raise RuntimeError(E_WOULDBLOCK)
+RuntimeError: Never call result.get() within a task!
+See https://docs.celeryq.dev/en/latest/userguide/tasks.html#avoid-launching-synchronous-subtasks
+
+[2026-03-29 23:41:13,220: INFO/MainProcess] missed heartbeat from worker2@Rushirajs-MacBook-Air.local
+[2026-03-29 23:41:13,224: INFO/MainProcess] Task workers.music_gen.generate_music_task[adb72f61-ee5f-4cad-bc5f-c26ac686b47b] received
+[2026-03-29 23:41:13,224: WARNING/MainProcess] Loading MusicGen facebook/musicgen-small (first load ~30s)...
+[2026-03-29 23:41:14,232: INFO/MainProcess] HTTP Request: HEAD https://huggingface.co/facebook/musicgen-small/resolve/main/state_dict.bin "HTTP/1.1 302 Found"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-03-29 23:41:14,234: WARNING/MainProcess] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-03-29 23:41:14,915: INFO/MainProcess] T5 will be evaluated with autocast as float32
+[2026-03-29 23:41:14,923: WARNING/MainProcess] /Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/audiocraft/utils/autocast.py:22: UserWarning: In MPS autocast, but the target dtype is not supported. Disabling autocast.
+MPS Autocast only supports dtypes of torch.bfloat16, torch.float16 currently.
+  self.autocast = torch.autocast(*args, **kwargs) if enabled else None
+
+[2026-03-29 23:41:20,950: INFO/MainProcess] HTTP Request: HEAD https://huggingface.co/facebook/musicgen-small/resolve/main/compression_state_dict.bin "HTTP/1.1 302 Found"
+[2026-03-29 23:41:21,426: WARNING/MainProcess] /Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+[2026-03-29 23:41:22,495: WARNING/MainProcess] Generating music for prompt: refined Victorian strings, solo violin, precise and methodical tempo (duration: 30s)
+[2026-03-29 23:41:25,399: INFO/MainProcess] New pattern, time steps: 1500, sequence steps: 1504
+[2026-03-29 23:46:55,046: WARNING/MainProcess] CLIPPING ./audio_files/music/2a3ad722-8cde-42c5-9add-437457522781_music happening with proba (a bit of clipping is okay):
+[2026-03-29 23:46:55,094: WARNING/MainProcess]  
+[2026-03-29 23:46:55,095: WARNING/MainProcess] 2.499999936844688e-05
+[2026-03-29 23:46:55,095: WARNING/MainProcess]  
+[2026-03-29 23:46:55,095: WARNING/MainProcess] maximum scale: 
+[2026-03-29 23:46:55,095: WARNING/MainProcess]  
+[2026-03-29 23:46:55,095: WARNING/MainProcess] 1.1823585033416748
+[2026-03-29 23:46:57,304: WARNING/MainProcess] Music generated and saved to: ./audio_files/music/2a3ad722-8cde-42c5-9add-437457522781_music.wav
+
+SIGHUP not supported: Restarting with SIGHUP is unstable on this platform!
+
+worker: Warm shutdown (MainProcess)
+[2026-03-30 00:31:26,350: WARNING/MainProcess] /Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py:784: RuntimeWarning: Exception raised outside body: network:ConnectionError:
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 858, in __protected_call__
+    return self.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/music_gen.py", line 44, in generate_music_task
+    raise e
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/music_gen.py", line 41, in generate_music_task
+    db.commit()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: INSERT INTO audio_tracks (id, scene_id, track_type, file_path, duration_seconds, status) VALUES (%(id)s::UUID, %(scene_id)s::UUID, %(track_type)s, %(file_path)s, %(duration_seconds)s, %(status)s)]
+[parameters: {'id': UUID('d2fb554f-5b7f-4c6f-85cf-fa81f60d08d4'), 'scene_id': '2a3ad722-8cde-42c5-9add-437457522781', 'track_type': 'music', 'file_path': './audio_files/music/2a3ad722-8cde-42c5-9add-437457522781_music.wav', 'duration_seconds': 30.0, 'status': 'done'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3048, in get_connection
+    connection.can_read()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1319, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/base.py", line 160, in can_read
+    return self._buffer and self._buffer.can_read(timeout)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 95, in can_read
+    return bool(self.unread_bytes()) or self._read_from_socket(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+           ^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1515, in _connect
+    raise err
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 605, in trace_task
+    I, R, state, retval = on_error(task_request, exc)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 421, in on_error
+    R = I.handle_error_state(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 199, in handle_error_state
+    return {
+           ^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 260, in handle_failure
+    task.backend.mark_as_failure(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 194, in mark_as_failure
+    self.store_result(task_id, exc, state,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 625, in store_result
+    self._store_result(task_id, result, state, traceback,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1090, in _store_result
+    current_meta = self._get_task_meta_for(task_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1112, in _get_task_meta_for
+    meta = self.get(self.get_key_for_task(task_id))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/redis.py", line 405, in get
+    return self.client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/commands/core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3055, in get_connection
+    connection.connect()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1025, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+  warn(RuntimeWarning(
+
+[2026-03-30 00:31:26,355: CRITICAL/MainProcess] Couldn't ack 'fec86659-0b44-43e8-b62c-6b9b0bff8e9f', reason:network:ConnectionError
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 858, in __protected_call__
+    return self.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/music_gen.py", line 44, in generate_music_task
+    raise e
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/workers/music_gen.py", line 41, in generate_music_task
+    db.commit()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: INSERT INTO audio_tracks (id, scene_id, track_type, file_path, duration_seconds, status) VALUES (%(id)s::UUID, %(scene_id)s::UUID, %(track_type)s, %(file_path)s, %(duration_seconds)s, %(status)s)]
+[parameters: {'id': UUID('d2fb554f-5b7f-4c6f-85cf-fa81f60d08d4'), 'scene_id': '2a3ad722-8cde-42c5-9add-437457522781', 'track_type': 'music', 'file_path': './audio_files/music/2a3ad722-8cde-42c5-9add-437457522781_music.wav', 'duration_seconds': 30.0, 'status': 'done'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3048, in get_connection
+    connection.can_read()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1319, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/base.py", line 160, in can_read
+    return self._buffer and self._buffer.can_read(timeout)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 95, in can_read
+    return bool(self.unread_bytes()) or self._read_from_socket(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+           ^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1515, in _connect
+    raise err
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 605, in trace_task
+    I, R, state, retval = on_error(task_request, exc)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 421, in on_error
+    R = I.handle_error_state(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 199, in handle_error_state
+    return {
+           ^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 260, in handle_failure
+    task.backend.mark_as_failure(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 194, in mark_as_failure
+    self.store_result(task_id, exc, state,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 625, in store_result
+    self._store_result(task_id, result, state, traceback,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1090, in _store_result
+    current_meta = self._get_task_meta_for(task_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1112, in _get_task_meta_for
+    meta = self.get(self.get_key_for_task(task_id))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/redis.py", line 405, in get
+    return self.client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/commands/core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3055, in get_connection
+    connection.connect()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1025, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+           ^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1515, in _connect
+    raise err
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/loops.py", line 97, in asynloop
+    next(loop)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 377, in create_loop
+    cb(*cbargs)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/redis.py", line 1394, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/redis.py", line 579, in on_readable
+    chan.handlers[type]()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/redis.py", line 994, in _brpop_read
+    self.connection._deliver(loads(bytes_to_str(item)), dest)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 1017, in _deliver
+    callback(message)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 639, in _callback
+    return callback(message)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/messaging.py", line 668, in _receive_callback
+    return on_m(message) if on_m else self.receive(decoded, message)
+           ^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 694, in on_task_received
+    strategy(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/strategy.py", line 208, in task_message_handler
+    handle(req)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/worker.py", line 226, in _process_task
+    req.execute_using_pool(self.pool)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/request.py", line 770, in execute_using_pool
+    result = apply_async(
+             ^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/concurrency/base.py", line 153, in apply_async
+    return self.on_apply(target, args, kwargs,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/concurrency/base.py", line 30, in apply_target
+    ret = target(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 773, in fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 683, in trace_task
+    I, _, _, _ = on_error(task_request, exc)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 421, in on_error
+    R = I.handle_error_state(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 199, in handle_error_state
+    return {
+           ^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/app/trace.py", line 260, in handle_failure
+    task.backend.mark_as_failure(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 194, in mark_as_failure
+    self.store_result(task_id, exc, state,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 625, in store_result
+    self._store_result(task_id, result, state, traceback,
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1090, in _store_result
+    current_meta = self._get_task_meta_for(task_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/base.py", line 1112, in _get_task_meta_for
+    meta = self.get(self.get_key_for_task(task_id))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/backends/redis.py", line 405, in get
+    return self.client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/commands/core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3041, in get_connection
+    connection.connect()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1025, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3048, in get_connection
+    connection.can_read()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1319, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/base.py", line 160, in can_read
+    return self._buffer and self._buffer.can_read(timeout)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 95, in can_read
+    return bool(self.unread_bytes()) or self._read_from_socket(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+           ^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1515, in _connect
+    raise err
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/message.py", line 131, in ack_log_error
+    self.ack(multiple=multiple)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/message.py", line 126, in ack
+    self.channel.basic_ack(self.delivery_tag, multiple=multiple)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/virtual/base.py", line 670, in basic_ack
+    self.qos.ack(delivery_tag)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/kombu/transport/redis.py", line 387, in ack
+    self._remove_from_indices(delivery_tag).execute()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/client.py", line 1938, in execute
+    conn = self.connection_pool.get_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 3055, in get_connection
+    connection.connect()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/redis/connection.py", line 1025, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+[2026-03-30 00:31:26,382: WARNING/MainProcess] Restoring 1 unacknowledged message(s)
+[2026-03-30 00:31:26,385: WARNING/MainProcess] /opt/homebrew/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:123: UserWarning: resource_tracker: process died unexpectedly, relaunching.  Some resources might leak.
+  warnings.warn('resource_tracker: process died unexpectedly, '
+
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Python runtime state: core initialized
+OSError: [Errno 9] Bad file descriptor
+
+Current thread 0x0000000200c47100 (most recent call first):
+  <no Python frame>

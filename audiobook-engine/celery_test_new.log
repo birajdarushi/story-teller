@@ -1,0 +1,96 @@
+/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/services/gemini_client.py:1: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+MusicGen using device: mps
+ 
+ -------------- worker2@Rushirajs-MacBook-Air.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.3.1-arm64-arm-64bit 2026-03-29 23:28:55
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         audiobook:0x10754f5d0
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . workers.music_gen.generate_music_task
+  . workers.narration.generate_narration_task
+  . workers.pipeline.run_pipeline
+  . workers.scene_parser.parse_scenes_task
+
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+[2026-03-29 23:28:56,134: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-03-29 23:28:56,143: INFO/MainProcess] mingle: searching for neighbors
+[2026-03-29 23:28:57,162: INFO/MainProcess] mingle: all alone
+[2026-03-29 23:28:57,193: INFO/MainProcess] worker2@Rushirajs-MacBook-Air.local ready.
+[2026-03-29 23:28:57,208: INFO/MainProcess] Task workers.pipeline.run_pipeline[5d196756-50b4-432e-bf36-7e9fef5ee921] received
+[2026-03-29 23:28:57,267: ERROR/MainProcess] Process 'ForkPoolWorker-1' pid:76675 exited with 'signal 11 (SIGSEGV)'
+[2026-03-29 23:28:57,293: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 11 (SIGSEGV) Job: 0.')
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 11 (SIGSEGV) Job: 0.
+"""
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+[2026-03-29 23:29:14,389: INFO/MainProcess] Task workers.pipeline.run_pipeline[6d85e28f-8409-41ec-afd1-6c0d10b1f197] received
+[2026-03-29 23:29:14,462: ERROR/MainProcess] Process 'ForkPoolWorker-2' pid:76682 exited with 'signal 11 (SIGSEGV)'
+[2026-03-29 23:29:14,478: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 11 (SIGSEGV) Job: 1.')
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 11 (SIGSEGV) Job: 1.
+"""
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+[2026-03-29 23:36:26,440: INFO/MainProcess] sync with worker3@Rushirajs-MacBook-Air.local
+[2026-03-29 23:41:02,513: INFO/MainProcess] missed heartbeat from worker3@Rushirajs-MacBook-Air.local
+[2026-03-29 23:41:13,200: INFO/MainProcess] Task workers.narration.generate_narration_task[4c66e0a9-2c47-4b6e-86e9-ec220246920d] received
+[2026-03-29 23:41:13,285: WARNING/ForkPoolWorker-3] Generating narration for text (length: 701)
+[2026-03-29 23:41:15,521: WARNING/ForkPoolWorker-3] ElevenLabs API Error: 401 - {"detail":{"status":"detected_unusual_activity","message":"Unusual activity detected. Free Tier usage disabled. If you are using a proxy/VPN you might need to purchase a Paid Plan to not trigger our abuse detectors. Free Tier only works if users do not abuse it, for example by creating multiple free accounts. If we notice that many people try to abuse it, we will need to reconsider Free Tier altogether. \nPlease play fair and purchase any Paid Subscription to continue."}}
+[2026-03-29 23:41:15,522: WARNING/ForkPoolWorker-3] Falling back to gTTS...
+[2026-03-29 23:41:15,525: WARNING/ForkPoolWorker-3] Generating narration using gTTS (fallback) for text (length: 701)
+[2026-03-29 23:41:17,532: INFO/MainProcess] missed heartbeat from worker3@Rushirajs-MacBook-Air.local
+[2026-03-29 23:41:36,540: WARNING/ForkPoolWorker-3] Narration generated and saved using gTTS to: ./audio_files/narration/2a3ad722-8cde-42c5-9add-437457522781_narration.mp3
+[2026-03-29 23:41:37,928: ERROR/MainProcess] Process 'ForkPoolWorker-3' pid:76812 exited with 'signal 11 (SIGSEGV)'
+[2026-03-29 23:41:38,543: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 11 (SIGSEGV) Job: 2.')
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 11 (SIGSEGV) Job: 2.
+"""
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+
+SIGHUP not supported: Restarting with SIGHUP is unstable on this platform!
+
+worker: Warm shutdown (MainProcess)
+
+worker: Warm shutdown (MainProcess)
+[2026-03-30 00:54:22,711: ERROR/MainProcess] Process 'ForkPoolWorker-4' pid:82370 exited with 'exitcode 1'
+OMP: Warning #179: Function Can't set size of /tmp file failed:

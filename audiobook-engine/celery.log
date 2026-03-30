@@ -1,0 +1,70 @@
+/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/services/gemini_client.py:1: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+ 
+ -------------- celery@Rushirajs-MacBook-Air.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.3.1-arm64-arm-64bit 2026-03-29 20:35:41
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         audiobook:0x10bc1f9d0
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . workers.pipeline.run_pipeline
+  . workers.scene_parser.parse_scenes_task
+
+[2026-03-29 20:35:41,753: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-03-29 20:35:41,761: INFO/MainProcess] mingle: searching for neighbors
+[2026-03-29 20:35:42,786: INFO/MainProcess] mingle: all alone
+[2026-03-29 20:35:42,815: INFO/MainProcess] celery@Rushirajs-MacBook-Air.local ready.
+[2026-03-29 20:35:46,574: INFO/MainProcess] Task workers.pipeline.run_pipeline[b273b857-735b-4ce8-a472-591d5d75a56e] received
+
+worker: Warm shutdown (MainProcess)
+[2026-03-29 20:36:02,845: ERROR/MainProcess] Process 'ForkPoolWorker-1' pid:909 exited with 'signal 15 (SIGTERM)'
+[2026-03-29 20:36:02,870: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 15 (SIGTERM) Job: 0.')
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/worker.py", line 203, in start
+    self.blueprint.start(self)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/bootsteps.py", line 365, in start
+    return self.obj.start()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 346, in start
+    blueprint.start(self)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/loops.py", line 86, in asynloop
+    state.maybe_shutdown()
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/celery/worker/state.py", line 93, in maybe_shutdown
+    raise WorkerShutdown(should_stop)
+celery.exceptions.WorkerShutdown: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rushiraj/Desktop/Home/story-teller/audiobook-engine/venv/lib/python3.11/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 15 (SIGTERM) Job: 0.
+"""

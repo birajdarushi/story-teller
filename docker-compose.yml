@@ -1,0 +1,27 @@
+version: '3.8'
+# M1 8GB NOTE: Only infra runs in Docker.
+# API + Celery + MusicGen run natively (venv) for MPS access.
+services:
+  redis:
+    image: redis:7-alpine
+    platform: linux/arm64   # native M1 image
+    ports:
+      - '6379:6379'
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+  postgres:
+    image: postgres:15
+    platform: linux/arm64   # native M1 image
+    environment:
+      POSTGRES_DB: audiobook
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+volumes:
+  pgdata:
