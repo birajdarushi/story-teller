@@ -23,3 +23,6 @@
 **/.next/
 **/out/
 **/build/
+
+# Project Docs
+project-plan.md

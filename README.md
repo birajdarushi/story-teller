@@ -89,4 +89,8 @@ curl -X POST http://localhost:8000/jobs/ \
 Watch the orchestration spin up as the database tracks the job state in real-time. Once the worker finishes the background score mixdown, grab your headphones, open the `audio_files/final/` directory, and listen to your story come alive!
 
 ---
-*Engineered with ❤️ by Nano Banana Microsystems*
+
+## 🗺️ Roadmap: The Future of StoryTeller
+Currently, the MVP relies on external APIs (like ElevenLabs) and generic open-source models (like MusicGen) to act as the "Voice" and the "Score". 
+
+As we move into **Phase 2 and beyond**, we are actively planning to build and train our own proprietary **TTS (Text-to-Speech)** and **TTM (Text-to-Music)** AI models natively in-house! The ultimate goal of StoryTeller is to become a 100% localized, hyper-optimized engine that generates breathtaking audiobooks entirely on your own hardware without relying on any paid cloud APIs.
